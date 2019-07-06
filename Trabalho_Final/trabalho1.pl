@@ -743,9 +743,7 @@ imprimeData([Dia, Mes] , Ano, Total) :-
     format('~d de ~s de ~d: R$~f', [Dia, Mes, Ano, Total]).*/
 
 maximo_high(Moeda, Ano, X) :-
-    findall(High, currency(Moeda, _, _, Ano, _, High, _, _, _, _), Lista),
-    aggregate_all((count, sum(N)), member(N, Lista), (Count, SumN)),
-	X is SumN/Count. 
+    aggregate_all(max(High), currency(Moeda, _, _, Ano, _, High, _, _, _, _), X).
 
 media_anual(Moeda, Ano, X) :-
     findall(Close, currency(Moeda, _, _, Ano, _, _, _, Close, _, _), Lista),
